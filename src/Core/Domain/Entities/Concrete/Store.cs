@@ -1,4 +1,5 @@
 ﻿using BasicECommerce.DAL.Entities.Abstract;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BasicECommerce.DAL.Entities.Concrete
@@ -12,6 +13,6 @@ namespace BasicECommerce.DAL.Entities.Concrete
         [Required]
         public User Owner { get; set; }
         [Required]
-        public Product Product { get; set; }
+        public IEnumerable<Product> Product { get; set; }
     }
 }

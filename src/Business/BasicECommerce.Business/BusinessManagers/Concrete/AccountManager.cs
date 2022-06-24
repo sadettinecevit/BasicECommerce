@@ -1,7 +1,9 @@
 ﻿using BasicECommerce.Business.BusinessManagers.Abstract;
-using BasicECommerce.DAL;
+using BasicECommerce.DAL.Context.Abstract;
 using BasicECommerce.DAL.DTOs;
+using BasicECommerce.DAL.Entities.Abstract;
 using BasicECommerce.DAL.Entities.Concrete;
+using BasicECommerce.DAL.Response;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -28,12 +30,12 @@ namespace BasicECommerce.Business.BusinessManagers.Concrete
             _signInManager = signInManager;
         }
 
-        public async Task<Response> Login(LoginDTO login)
+        public async Task<BaseResponse> Login(LoginDTO login)
         {
-            Response retVal = new Response();
+            BaseResponse retVal = new BaseResponse();
 
             List<Claim>? claims = new List<Claim>();
-            User user = await _userManager.FindByEmailAsync(login.EMail);
+            User user = _userManager.FindByEmailAsync(login.EMail).Result;
 
             if (user != null)
             {
@@ -90,6 +92,11 @@ namespace BasicECommerce.Business.BusinessManagers.Concrete
             }
 
             return retVal;
+        }
+
+        public Task<BaseResponse> Register(RegisterDTO login)
+        {
+            throw new NotImplementedException();
         }
 
         private JwtSecurityToken GetToken(List<Claim> claims = null)

@@ -1,6 +1,6 @@
 using BasicECommerce.Business.BusinessManagers.Abstract;
-using BasicECommerce.DAL;
 using BasicECommerce.DAL.DTOs;
+using BasicECommerce.DAL.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasicECommerce.WebAPI.Controllers
@@ -39,7 +39,7 @@ namespace BasicECommerce.WebAPI.Controllers
         public async Task<IActionResult> Login([FromBody]LoginDTO login)
         {
             IActionResult result = null;
-            Response retVal = await _manager.Login(login);
+            BaseResponse retVal = await _manager.Login(login);
 
             if(retVal.IsSucces)
                 result = Ok(retVal);

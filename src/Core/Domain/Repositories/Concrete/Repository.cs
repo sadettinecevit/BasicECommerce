@@ -3,6 +3,7 @@ using BasicECommerce.DAL.Entities.Abstract;
 using BasicECommerce.DAL.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq.Expressions;
 
 namespace BasicECommerce.DAL.Repositories.Concrete
 {
@@ -37,8 +38,8 @@ namespace BasicECommerce.DAL.Repositories.Concrete
             return result;
         }
 
-        public async Task<List<T>> GetAsync() => await Table.ToListAsync();
+        public async Task<List<T>> GetAsync(Expression<Func<T, bool>> expression = null) => Table.Where(expression).ToList();
 
-        public async Task<T> GetByIdAsync(string id) => await Table.FindAsync(id);
+        public async Task<T> GetByIdAsync(Guid id) => await Table.FindAsync(id);
     }
 }

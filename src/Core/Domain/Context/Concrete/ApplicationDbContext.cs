@@ -24,14 +24,6 @@ namespace BasicECommerce.DAL.Context.Concrete
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Cart>().HasKey(b => b.Id).HasName("PrimaryKey_CartId");
-            //modelBuilder.Entity<Store>().HasKey(b => b.Id).HasName("PrimaryKey_StoreId");
-            //modelBuilder.Entity<Brand>().HasKey(b => b.Id).HasName("PrimaryKey_BrandId");
-            //modelBuilder.Entity<Category>().HasKey(b => b.Id).HasName("PrimaryKey_CategoryId");
-            //modelBuilder.Entity<Color>().HasKey(b => b.Id).HasName("PrimaryKey_ColorId");
-            //modelBuilder.Entity<Product>().HasKey(b => b.Id).HasName("PrimaryKey_ProductId");
-//            modelBuilder.Entity<User>().Property(f => f.Id).ValueGeneratedOnAdd();
-
             IEnumerable<User> users = new List<User>()
                 {
                     new User {Email = "secevit", UserName = "secevit", Name = "Sadettin", Lastname = "Ecevit"},
