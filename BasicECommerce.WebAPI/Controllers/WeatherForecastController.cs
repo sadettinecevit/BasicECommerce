@@ -15,11 +15,9 @@ namespace BasicECommerce.WebAPI.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IAccountManager _manager;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IAccountManager accountManager)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            _manager = accountManager;
             _logger = logger;
         }
 
@@ -35,18 +33,5 @@ namespace BasicECommerce.WebAPI.Controllers
             .ToArray();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Login([FromBody]LoginDTO login)
-        {
-            IActionResult result = null;
-            BaseResponse retVal = await _manager.Login(login);
-
-            if(retVal.IsSucces)
-                result = Ok(retVal);
-            else
-                result = Unauthorized(retVal);
-
-            return result;
-        }
     }
 }

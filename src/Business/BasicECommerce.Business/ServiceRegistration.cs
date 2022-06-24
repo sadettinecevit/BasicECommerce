@@ -16,6 +16,13 @@ namespace BasicECommerce.Business
             serviceCollection.AddDALService(configuration);
 
             serviceCollection.AddTransient<IAccountManager, AccountManager>();
+            serviceCollection.AddTransient<IBrandManager, BrandManager>();
+            serviceCollection.AddTransient<ICartManager, CartManager>();
+            serviceCollection.AddTransient<ICategoryManager, CategoryManager>();
+            serviceCollection.AddTransient<IColorManager, ColorManager>();
+            serviceCollection.AddTransient<IProductManager, ProductManager>();
+            serviceCollection.AddTransient<IStoreManager, StoreManager>();
+            serviceCollection.AddTransient<IUserManager, UserManager>();
 
             serviceCollection.AddIdentity<User, IdentityRole>()
                             .AddRoles<IdentityRole>()

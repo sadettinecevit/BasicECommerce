@@ -19,6 +19,8 @@ namespace BasicECommerce.DAL
             serviceCollection.AddTransient<IColorRepository, ColorRepository>();
             serviceCollection.AddTransient<IProductRepository, ProductRepository>();
             serviceCollection.AddTransient<IUserRepository, UserRepository>();
+            serviceCollection.AddTransient<ICartRepository, CartRepository>();
+            serviceCollection.AddTransient<IStoreRepository, StoreRepository>();
         }
     }
 }

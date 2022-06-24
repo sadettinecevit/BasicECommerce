@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BasicECommerce.DAL.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -212,6 +212,25 @@ namespace BasicECommerce.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Stores",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stores", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stores_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -224,7 +243,8 @@ namespace BasicECommerce.DAL.Migrations
                     Explanation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false),
-                    CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    StoreId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -252,32 +272,11 @@ namespace BasicECommerce.DAL.Migrations
                         principalTable: "Colors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Stores",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Stores", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Stores_AspNetUsers_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Stores_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Products_Stores_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Stores",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -285,9 +284,9 @@ namespace BasicECommerce.DAL.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "Lastname", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "968c88d7-4c52-4a8a-8ed0-138d9e8cc40c", 0, "15a5238e-36d8-4197-bd7f-bf30811b1e8c", "User", "secevit", false, "Ecevit", false, null, "Sadettin", null, null, null, null, false, "3c87958d-5db9-4d9a-babe-fb72a0d9c634", false, "secevit" },
-                    { "9c5afa8f-6ce2-4609-b530-56f2c53e18e9", 0, "b105b2a9-c22a-478a-8dec-8414852032a7", "User", "ecevit", false, "Ecevit", false, null, "Sadettin", null, null, null, null, false, "cffaabcc-a178-4676-8038-c59dd6c14652", false, "ecevit" },
-                    { "f68a20c2-7dc7-4aa3-abe0-633e6bd03e72", 0, "6023df6a-605b-40bf-b25f-683e03b8bb09", "User", "sadettin", false, "Ecevit", false, null, "Sadettin", null, null, null, null, false, "0186dc56-13bd-4b38-bf2e-bdcf4a967fb5", false, "sadettin" }
+                    { "03db77bc-4f43-470a-ad6f-11d7e0361312", 0, "beeb5245-8309-43a4-8a11-c4b6e451a8d3", "User", "secevit", false, "Ecevit", false, null, "Sadettin", null, null, null, null, false, "917a2893-9a58-4d7f-bb47-0f1e6f752070", false, "secevit" },
+                    { "20fe925b-7f5d-44f0-be2a-db2c36f3325b", 0, "6b1a28cc-abd1-4abb-b2e4-d22d55919034", "User", "sadettin", false, "Ecevit", false, null, "Sadettin", null, null, null, null, false, "44c51253-9fd5-4011-a890-da5f36b84e8e", false, "sadettin" },
+                    { "61f75602-2971-44d2-a4b7-0cd6087f9ada", 0, "335b2edc-e56b-4a77-981c-3a576f2f6f35", "User", "ecevit", false, "Ecevit", false, null, "Sadettin", null, null, null, null, false, "5e13b3c3-fcd7-4c6d-a763-0bd4658efdd2", false, "ecevit" }
                 });
 
             migrationBuilder.InsertData(
@@ -295,10 +294,10 @@ namespace BasicECommerce.DAL.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("22f79c66-6e75-4e30-8784-07fdf1c6ef96"), "Apple" },
-                    { new Guid("6348d485-59f2-48ca-b6f1-dd9ad948b703"), "Samsung" },
-                    { new Guid("b561aeb9-f32e-4543-9b75-8d2d2c5864e5"), "Microsoft" },
-                    { new Guid("cfecc117-d3b7-4ff2-b27b-02b6b9367c3d"), "Toyota" }
+                    { new Guid("16c4e702-5a71-4be5-b819-a919ae5e446a"), "Microsoft" },
+                    { new Guid("50b0dfb2-b7ae-4e24-9e83-c621409d22f9"), "Toyota" },
+                    { new Guid("9922bf77-4fbc-4947-8ebd-2b4ec3dda9dd"), "Apple" },
+                    { new Guid("a2cbce5b-bf35-4750-bf2e-099bea32fe84"), "Samsung" }
                 });
 
             migrationBuilder.InsertData(
@@ -306,10 +305,10 @@ namespace BasicECommerce.DAL.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("04f80cf1-64bd-4713-aad4-ca45da39db61"), "Mobile Phone" },
-                    { new Guid("28f44586-ca9c-4e56-af8c-af46a9c690a4"), "Car" },
-                    { new Guid("58a602fd-ee60-4ede-a20c-c8d8e21c07d4"), "Software" },
-                    { new Guid("65dfc33f-7e70-4573-9a94-400d735d5d1e"), "Computer" }
+                    { new Guid("5e15c730-7460-41ba-ba10-d89e8e483a31"), "Car" },
+                    { new Guid("736960ad-2058-4825-b599-b8c2d797de83"), "Computer" },
+                    { new Guid("8fcffc26-d171-4fb9-8ef7-b703fb5fb969"), "Mobile Phone" },
+                    { new Guid("cf594945-1722-41c0-b3a9-6840550926f0"), "Software" }
                 });
 
             migrationBuilder.InsertData(
@@ -317,10 +316,10 @@ namespace BasicECommerce.DAL.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0bbfe23c-d960-4143-907b-e3b5713076e7"), "Blue" },
-                    { new Guid("5f581c3c-f4df-42a3-a94e-e51aca2c8c97"), "None" },
-                    { new Guid("8c24d48e-fdd1-47e2-8caa-4ab55c36645c"), "Green" },
-                    { new Guid("dd9b79ee-550a-472c-b7b1-e6c14afe590d"), "Red" }
+                    { new Guid("1f3fa2b6-e540-4c38-be9a-3be364c1f446"), "Green" },
+                    { new Guid("47fc1fd3-8633-40e4-84e2-da177c12e7cd"), "None" },
+                    { new Guid("725a7e56-7f3a-4ccd-bd0c-99508df7a3e4"), "Blue" },
+                    { new Guid("ac60572e-e754-48f1-a3a3-a7f50380b61a"), "Red" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -388,14 +387,14 @@ namespace BasicECommerce.DAL.Migrations
                 column: "ColorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_StoreId",
+                table: "Products",
+                column: "StoreId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Stores_OwnerId",
                 table: "Stores",
                 column: "OwnerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stores_ProductId",
-                table: "Stores",
-                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -416,13 +415,10 @@ namespace BasicECommerce.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Stores");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Brands");
@@ -435,6 +431,9 @@ namespace BasicECommerce.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Colors");
+
+            migrationBuilder.DropTable(
+                name: "Stores");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

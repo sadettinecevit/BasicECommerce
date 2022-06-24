@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BasicECommerce.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220623220411_Initial")]
-    partial class Initial
+    [Migration("20220624094406_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,22 +41,22 @@ namespace BasicECommerce.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("22f79c66-6e75-4e30-8784-07fdf1c6ef96"),
+                            Id = new Guid("9922bf77-4fbc-4947-8ebd-2b4ec3dda9dd"),
                             Name = "Apple"
                         },
                         new
                         {
-                            Id = new Guid("6348d485-59f2-48ca-b6f1-dd9ad948b703"),
+                            Id = new Guid("a2cbce5b-bf35-4750-bf2e-099bea32fe84"),
                             Name = "Samsung"
                         },
                         new
                         {
-                            Id = new Guid("cfecc117-d3b7-4ff2-b27b-02b6b9367c3d"),
+                            Id = new Guid("50b0dfb2-b7ae-4e24-9e83-c621409d22f9"),
                             Name = "Toyota"
                         },
                         new
                         {
-                            Id = new Guid("b561aeb9-f32e-4543-9b75-8d2d2c5864e5"),
+                            Id = new Guid("16c4e702-5a71-4be5-b819-a919ae5e446a"),
                             Name = "Microsoft"
                         });
                 });
@@ -95,22 +95,22 @@ namespace BasicECommerce.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("04f80cf1-64bd-4713-aad4-ca45da39db61"),
+                            Id = new Guid("8fcffc26-d171-4fb9-8ef7-b703fb5fb969"),
                             Name = "Mobile Phone"
                         },
                         new
                         {
-                            Id = new Guid("65dfc33f-7e70-4573-9a94-400d735d5d1e"),
+                            Id = new Guid("736960ad-2058-4825-b599-b8c2d797de83"),
                             Name = "Computer"
                         },
                         new
                         {
-                            Id = new Guid("28f44586-ca9c-4e56-af8c-af46a9c690a4"),
+                            Id = new Guid("5e15c730-7460-41ba-ba10-d89e8e483a31"),
                             Name = "Car"
                         },
                         new
                         {
-                            Id = new Guid("58a602fd-ee60-4ede-a20c-c8d8e21c07d4"),
+                            Id = new Guid("cf594945-1722-41c0-b3a9-6840550926f0"),
                             Name = "Software"
                         });
                 });
@@ -132,22 +132,22 @@ namespace BasicECommerce.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5f581c3c-f4df-42a3-a94e-e51aca2c8c97"),
+                            Id = new Guid("47fc1fd3-8633-40e4-84e2-da177c12e7cd"),
                             Name = "None"
                         },
                         new
                         {
-                            Id = new Guid("8c24d48e-fdd1-47e2-8caa-4ab55c36645c"),
+                            Id = new Guid("1f3fa2b6-e540-4c38-be9a-3be364c1f446"),
                             Name = "Green"
                         },
                         new
                         {
-                            Id = new Guid("0bbfe23c-d960-4143-907b-e3b5713076e7"),
+                            Id = new Guid("725a7e56-7f3a-4ccd-bd0c-99508df7a3e4"),
                             Name = "Blue"
                         },
                         new
                         {
-                            Id = new Guid("dd9b79ee-550a-472c-b7b1-e6c14afe590d"),
+                            Id = new Guid("ac60572e-e754-48f1-a3a3-a7f50380b61a"),
                             Name = "Red"
                         });
                 });
@@ -188,6 +188,9 @@ namespace BasicECommerce.DAL.Migrations
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("StoreId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
@@ -197,6 +200,8 @@ namespace BasicECommerce.DAL.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ColorId");
+
+                    b.HasIndex("StoreId");
 
                     b.ToTable("Products");
                 });
@@ -215,14 +220,9 @@ namespace BasicECommerce.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Stores");
                 });
@@ -448,14 +448,14 @@ namespace BasicECommerce.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "968c88d7-4c52-4a8a-8ed0-138d9e8cc40c",
+                            Id = "03db77bc-4f43-470a-ad6f-11d7e0361312",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "15a5238e-36d8-4197-bd7f-bf30811b1e8c",
+                            ConcurrencyStamp = "beeb5245-8309-43a4-8a11-c4b6e451a8d3",
                             Email = "secevit",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3c87958d-5db9-4d9a-babe-fb72a0d9c634",
+                            SecurityStamp = "917a2893-9a58-4d7f-bb47-0f1e6f752070",
                             TwoFactorEnabled = false,
                             UserName = "secevit",
                             Lastname = "Ecevit",
@@ -463,14 +463,14 @@ namespace BasicECommerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = "9c5afa8f-6ce2-4609-b530-56f2c53e18e9",
+                            Id = "61f75602-2971-44d2-a4b7-0cd6087f9ada",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b105b2a9-c22a-478a-8dec-8414852032a7",
+                            ConcurrencyStamp = "335b2edc-e56b-4a77-981c-3a576f2f6f35",
                             Email = "ecevit",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cffaabcc-a178-4676-8038-c59dd6c14652",
+                            SecurityStamp = "5e13b3c3-fcd7-4c6d-a763-0bd4658efdd2",
                             TwoFactorEnabled = false,
                             UserName = "ecevit",
                             Lastname = "Ecevit",
@@ -478,14 +478,14 @@ namespace BasicECommerce.DAL.Migrations
                         },
                         new
                         {
-                            Id = "f68a20c2-7dc7-4aa3-abe0-633e6bd03e72",
+                            Id = "20fe925b-7f5d-44f0-be2a-db2c36f3325b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6023df6a-605b-40bf-b25f-683e03b8bb09",
+                            ConcurrencyStamp = "6b1a28cc-abd1-4abb-b2e4-d22d55919034",
                             Email = "sadettin",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0186dc56-13bd-4b38-bf2e-bdcf4a967fb5",
+                            SecurityStamp = "44c51253-9fd5-4011-a890-da5f36b84e8e",
                             TwoFactorEnabled = false,
                             UserName = "sadettin",
                             Lastname = "Ecevit",
@@ -528,6 +528,10 @@ namespace BasicECommerce.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BasicECommerce.DAL.Entities.Concrete.Store", null)
+                        .WithMany("Product")
+                        .HasForeignKey("StoreId");
+
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
@@ -543,15 +547,7 @@ namespace BasicECommerce.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BasicECommerce.DAL.Entities.Concrete.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Owner");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -608,6 +604,11 @@ namespace BasicECommerce.DAL.Migrations
             modelBuilder.Entity("BasicECommerce.DAL.Entities.Concrete.Cart", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BasicECommerce.DAL.Entities.Concrete.Store", b =>
+                {
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }
