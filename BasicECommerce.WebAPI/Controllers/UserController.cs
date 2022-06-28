@@ -18,8 +18,8 @@ namespace BasicECommerce.WebAPI.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("getbyid")]
-        public async Task<IActionResult> GetById([FromBody]string id)
+        [HttpGet("GetById/{id}")]
+        public async Task<IActionResult> GetById([FromQuery] string id)
         {
             IActionResult result = null;
 
@@ -36,8 +36,8 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpGet("get")]
-        public async Task<IActionResult> Get([FromBody] string email = null)
+        [HttpGet("get/{email}")]
+        public async Task<IActionResult> Get([FromQuery] string email = null)
         {
             IActionResult result = null;
 
@@ -54,7 +54,7 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDTO user)
         {
             IActionResult result = null;
@@ -72,7 +72,7 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpPatch()]
+        [HttpPatch]
         public async Task<IActionResult> Update([FromBody] UserDTO user, string id)
         {
             IActionResult result = null;
@@ -104,4 +104,5 @@ namespace BasicECommerce.WebAPI.Controllers
             return result;
         }
     }
+
 }

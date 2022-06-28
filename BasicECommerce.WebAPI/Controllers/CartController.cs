@@ -16,8 +16,8 @@ namespace BasicECommerce.WebAPI.Controllers
             _cartManager = cartManager;
         }
 
-        [HttpGet("getbyid")]
-        public async Task<IActionResult> GetById([FromBody] string id)
+        [HttpGet("GetById/{id}")]
+        public async Task<IActionResult> GetById([FromQuery]string id)
         {
             IActionResult result = null;
 
@@ -34,8 +34,8 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpGet("get")]
-        public async Task<IActionResult> Get([FromBody] string email = null)
+        [HttpGet("Get/{email}")]
+        public async Task<IActionResult> Get([FromQuery]string email = null)
         {
             IActionResult result = null;
 
@@ -52,7 +52,7 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> Add([FromBody] CartDTO cart)
         {
             IActionResult result = null;
@@ -70,7 +70,7 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpPost()]
+        [HttpPatch]
         public async Task<IActionResult> Update([FromBody] CartDTO cart, string id)
         {
             IActionResult result = null;
@@ -88,7 +88,7 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpPost()]
+        [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] string id)
         {
             IActionResult result = null;

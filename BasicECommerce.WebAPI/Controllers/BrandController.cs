@@ -18,8 +18,8 @@ namespace BasicECommerce.WebAPI.Controllers
             _BrandManager = BrandManager;
         }
 
-        [HttpGet("getbyid")]
-        public async Task<IActionResult> GetById([FromBody] string id)
+        [HttpGet("getbyid/{id}")]
+        public async Task<IActionResult> GetById([FromQuery]string id)
         {
             IActionResult result = null;
 
@@ -36,8 +36,8 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpGet("get")]
-        public async Task<IActionResult> Get([FromBody] string name = null)
+        [HttpGet("get/{name}")]
+        public async Task<IActionResult> Get([FromQuery]string name = null)
         {
             IActionResult result = null;
 
@@ -54,7 +54,7 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> Add([FromBody] BrandDTO brand)
         {
             IActionResult result = null;
@@ -72,7 +72,7 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpPost()]
+        [HttpPatch]
         public async Task<IActionResult> Update([FromBody] BrandDTO brand, string id)
         {
             IActionResult result = null;
@@ -90,7 +90,7 @@ namespace BasicECommerce.WebAPI.Controllers
 
             return result;
         }
-        [HttpPost()]
+        [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] string id)
         {
             IActionResult result = null;

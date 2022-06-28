@@ -9,7 +9,7 @@ namespace BasicECommerce.DAL.Context.Concrete
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            Database.Migrate(); //.SetInitializer(new MigrateDatabaseToLatestVersion<SchoolDBContext, EF6Console.Migrations.Configuration>());
+            //Database.Migrate(); //.SetInitializer(new MigrateDatabaseToLatestVersion<SchoolDBContext, EF6Console.Migrations.Configuration>());
         }
 
         public DbSet<User> Users { get; set; }
